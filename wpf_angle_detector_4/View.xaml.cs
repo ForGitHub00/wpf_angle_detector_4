@@ -17,8 +17,8 @@ namespace wpf_angle_detector_4 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class View : Window {
+        public View() {
             InitializeComponent();
         }
     }
