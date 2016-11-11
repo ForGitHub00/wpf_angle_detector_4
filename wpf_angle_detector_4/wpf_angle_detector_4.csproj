@@ -81,11 +81,19 @@
     <Compile Include="Classes\Calculate.cs" />
     <Compile Include="Classes\DataPoint.cs" />
     <Compile Include="Classes\Helper.cs" />
+    <Compile Include="Classes\ItemsForCanvas.cs" />
     <Compile Include="Controls\DataViewerControl.xaml.cs">
       <DependentUpon>DataViewerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TestCanvasControl.xaml.cs">
+      <DependentUpon>TestCanvasControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="Controls\DataViewerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TestCanvasControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

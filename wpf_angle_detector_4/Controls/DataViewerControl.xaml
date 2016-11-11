@@ -8,36 +8,65 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:ViewModel />
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="35" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.RowSpan="2" Grid.Column="1">
+        <StackPanel Grid.RowSpan="2" Grid.Column="2">
             <CheckBox
                 x:Name="CheckBox_Proporc"
                 Grid.Row="0"
-                Grid.Column="1"
-                Margin="50"
+                Grid.Column="2"
+                Margin="1"
                 Content="Proporc" />
+            <Button Content="Type 1" />
         </StackPanel>
         <Canvas
             x:Name="Cnv"
             Grid.Row="0"
             Grid.Column="0"
-            Background="#FFE0AAAA" />
+            Background="#FFE0AAAA">
+            <ItemsControl ItemsSource="{Binding Path=DataForCanvas}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Z}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse
+                            Width="2"
+                            Height="2"
+                            Fill="#FFF00000"
+                            Stroke="#FFEA0000"
+                            StrokeThickness="5" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
         <TextBlock
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             Text="{Binding Xmax}" />
         <TextBlock
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             Margin="0,21,0,0"
             Text="{Binding Xmin}" />
     </Grid>

@@ -23,7 +23,7 @@ namespace wpf_angle_detector_4{
             public double Z { get; set; }
         }
 
-        private IDictionary<int, Point> Data { get; set; }
+        public IDictionary<int, Point> Data { get; set; }
 
         public Point this[int index]{
             set { Data[index] = value; }

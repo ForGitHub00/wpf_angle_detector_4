@@ -25,7 +25,7 @@ namespace wpf_angle_detector_4 {
             InitializeComponent();
             //Data = new DataPoint();
             this.SizeChanged += DataViewerControl_SizeChanged;
-            Data = (DataPoint) this.DataContext;
+           // Data = (DataPoint) this.DataContext;
             EllipseDictionary = new Dictionary<Ellipse, int>();
         }
         public DataPoint Data { set; get; }
@@ -34,29 +34,36 @@ namespace wpf_angle_detector_4 {
         private double XOffset;
         private double ZOffset;
 
+        public DependencyObject Data1;
+
         private void DataViewerControl_SizeChanged(object sender, SizeChangedEventArgs e){
             //Console.WriteLine($"W = {this.Width} -----  H = {this.Height}");
             Console.WriteLine($"W = {this.ActualWidth} -----  H = {this.ActualHeight}\n");
-
+            //Cnv.Children.Clear();
             if (CheckBox_Proporc.IsChecked == true){
                 this.Height = this.Width;
                 Window w =(Window)((Grid) this.Parent).Parent;
                 w.Height = w.Width;
             }
 
-            var t = (ObservableCollection<DataPoint>)this.DataContext;
-            Data = (DataPoint)t[0];
-            if (Data != null){
-                Cnv.Children.Clear();
-                DrawCells();
-                DrawPoints();
-            }
-
+           // var t = (ObservableCollection<DataPoint>)this.DataContext;
+            //Data = t[0];
+            //if (Data == null) return;
+            DrawCells();
+            //DrawPoints();
         }
 
         public void DrawCells(){
-           
             //int countX = (int)Math.Abs(Data.Xmin/10) + (int)Math.Abs(Data.Xmax / 10) + 2;
+            
+            if (IsLoaded){
+                for (int i = 0; i < Cnv.Children.Count; i++) {
+                    if (Cnv.Children[i].GetType() == typeof(Line) || Cnv.Children[i].GetType() == typeof(TextBlock)) {
+                        Cnv.Children.Remove(Cnv.Children[i]);
+                    }
+                }
+            }
+           
             int countX = 16;
             double stepX = Cnv.ActualWidth/countX;           
             for (int i = 1; i < countX; i++){
@@ -102,6 +109,7 @@ namespace wpf_angle_detector_4 {
         }
 
         public void DrawPoints(){
+            
             EllipseDictionary.Clear();
             XOffset = Cnv.ActualWidth / 160;
             ZOffset = Cnv.ActualHeight / 270;
